@@ -2,6 +2,6 @@ import javax.swing.SwingUtilities;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        SwingUtilities.invokeLater(Ejemplo_GridLayout::new);
+        SwingUtilities.invokeLater(Ejemplo_Composicion::new);
     }
 }
