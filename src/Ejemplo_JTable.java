@@ -1,25 +1,48 @@
+import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 public class Ejemplo_JTable extends JFrame {
     public Ejemplo_JTable(){
-        try {
-            // Sets the Look and Feel to the native style of the current OS
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         setTitle("Lista de Estudiantes");
         setSize(550, 350);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        // Norte - Titulo
+        JLabel titulo = new JLabel("Registro de Estudiantes",
+            SwingConstants.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 20));
+        titulo.setForeground(new Color(6, 90, 130));
+        titulo.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
+        add(titulo, BorderLayout.NORTH);
+        // Center 4 x 2 
+        JPanel campos = new JPanel(new GridLayout(4, 2, 5, 6));
+        campos.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        campos.add(new JLabel("Nombres: "));
+        campos.add(new JTextField());
+        campos.add(new JLabel("Codigo: "));
+        campos.add(new JTextField());
+        String[] ciclos = {"1ro", "2do", "3ro", "4to", "5to", "6to"};
+        campos.add(new JLabel("Ciclo: "));
+        campos.add(new JComboBox<>(ciclos));
+        campos.add(new JLabel("Activo: "));
+        campos.add(new JCheckBox("Estudiante Activo"));
+        add(campos, BorderLayout.CENTER);
 
         // 1. Definir columnas
         String[] cols = {"Codigo", "Nombre", "Ciclo", "Nota"};
@@ -46,7 +69,9 @@ public class Ejemplo_JTable extends JFrame {
         tabla.getTableHeader().setBackground(new Color(6, 90, 130));
         tabla.getTableHeader().setForeground(Color.WHITE);
         // 5. JScrollPane -> Obligatorio
-        add(new JScrollPane(tabla), BorderLayout.CENTER);
+        add(tabla, BorderLayout.SOUTH);
+
+        
         setVisible(true);
 
     }
