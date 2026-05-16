@@ -4,11 +4,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
@@ -31,6 +29,7 @@ public class Ejemplo_JTable extends JFrame {
         titulo.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
         add(titulo, BorderLayout.NORTH);
         // Center 4 x 2 
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
         JPanel campos = new JPanel(new GridLayout(4, 2, 5, 6));
         campos.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         campos.add(new JLabel("Nombres: "));
@@ -42,7 +41,7 @@ public class Ejemplo_JTable extends JFrame {
         campos.add(new JComboBox<>(ciclos));
         campos.add(new JLabel("Activo: "));
         campos.add(new JCheckBox("Estudiante Activo"));
-        add(campos, BorderLayout.CENTER);
+        panelPrincipal.add(campos, BorderLayout.NORTH);
 
         // 1. Definir columnas
         String[] cols = {"Codigo", "Nombre", "Ciclo", "Nota"};
@@ -62,6 +61,7 @@ public class Ejemplo_JTable extends JFrame {
         };
         // 4. Jtable con el modelo
         JTable tabla = new JTable(modelo);
+        tabla.setSize(550, 200);
         tabla.setFont(new Font("Arial", Font.PLAIN, 14));
         tabla.setRowHeight(28);
         //Estilo del encabezado
@@ -69,8 +69,8 @@ public class Ejemplo_JTable extends JFrame {
         tabla.getTableHeader().setBackground(new Color(6, 90, 130));
         tabla.getTableHeader().setForeground(Color.WHITE);
         // 5. JScrollPane -> Obligatorio
-        add(tabla, BorderLayout.SOUTH);
-
+        panelPrincipal.add(tabla, BorderLayout.SOUTH);
+        add(panelPrincipal, BorderLayout.CENTER);
         
         setVisible(true);
 

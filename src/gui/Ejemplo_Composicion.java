@@ -1,3 +1,4 @@
+package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,9 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import entidades.Producto;
 
 public class Ejemplo_Composicion extends JFrame{
     private JTextField txtNombre = new JTextField();
@@ -66,6 +70,36 @@ public class Ejemplo_Composicion extends JFrame{
         panelSur.add(panelIzq, BorderLayout.WEST);
         panelSur.add(panelDer, BorderLayout.EAST);
         add(panelSur, BorderLayout.SOUTH);
+
+        
+        // Eventos Basicos
+        btnGuardar.addActionListener(e -> {
+            String nombre = txtNombre.getText().trim();
+            if(nombre.isEmpty()){
+                lblEstado.setText("⚠️ Nombre requerido");
+                lblEstado.setForeground(Color.RED);
+                return;
+            }
+            String codigo = txtCodigo.getText().trim();
+            if(codigo.isEmpty()){
+                lblEstado.setText("⚠️ codigo requerido");
+                lblEstado.setForeground(Color.RED);
+                return;
+            }
+            String categoria = cbCategoria.getSelectedItem().toString();
+            Producto productoAGuardar = new Producto(nombre, codigo, categoria);
+            // Mandar a guardar al dao
+            // ProductoDAO productoDAO = new ProductoDAO();
+            // bool resultado = productoDAO.guardarProducto(productoAGuardar)
+            // if(resultado == True){
+            //    JOptionPane.showMessageDialog(null, "Producto registrado con exito");
+            // }else{
+            //    JOptionPane.showMessageDialog(null, "Error al registrar producto");
+            // }
+        });
+        //cbCategoria.addActionListener(e->{
+        //    JOptionPane.showMessageDialog(null, cbCategoria.getSelectedItem());
+        //});
 
         setVisible(true);
     }
